@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Check if correct number of arguments are passed
-if [[ $# -ne 4 ]]; then
-  echo "Usage: $0 <bucket_name> <line_count> <endpoint_url> <profile>"
+if [[ $# -lt 4 || $# -gt 5 ]]; then
+  echo "Usage: $0 <bucket_name> <line_count> <endpoint_url> <profile> [input_file]"
   exit 1
 fi
 
@@ -49,6 +49,9 @@ deleteObjects() {
   aws s3api delete-objects --bucket $bucket_name --delete file://$filename --endpoint-url $endpoint_url --profile $profile
 }
 
+# Default to stdin if no input file is provided
+input=${5:-/dev/stdin}
+
 while IFS= read -r line
 do
   buffer+="$line"$'\n'
@@ -60,7 +63,7 @@ do
     count=0
     buffer=""
   fi
-done
+done <"$input"
 
 # processing the remaining lines if less than line_count
 if ((count > 0)); then

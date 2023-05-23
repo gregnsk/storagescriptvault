@@ -4,7 +4,7 @@ NAME
     
 SYNOPSIS
 
-                delete-objects.sh <bucket_name> <numObjects> <endpoint-url> <profile-name>
+                delete-objects.sh <bucket_name> <numObjects> <endpoint-url> <profile-name> [input-file]
   
 DESCRIPTION
 
@@ -12,6 +12,7 @@ DESCRIPTION
 		numObjects:    Number of objects to be deleted with each DeleteObjects request, between 10 and 1000
 		endpoint-url:  S3 endpoint, for example https://s3.us-west-1.lyvecloud.seagate.com
 		profile-name:  Profile defined in ~/.aws/credentials
+                input-file:    Optional, list of objects in a bucket. If omitted, expects list of objects on STDIN
     
 EXAMPLES
 
@@ -24,6 +25,7 @@ EXAMPLES
     
 VERSION 
     1.0 (May, 19 2023)  First implementation
+    1.1 (May, 23 2023)  Added support for pre-defined input file with the list of objects for deletion
 
 AUTHOR
 
