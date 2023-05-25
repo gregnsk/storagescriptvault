@@ -11,6 +11,8 @@ line_count=$2
 endpoint_url=$3
 profile=$4
 
+timeout="600"
+
 # Validate line_count
 if ((line_count < 10)) || ((line_count > 1000)); then
   echo "Line count must be between 10 and 1000."
@@ -46,7 +48,7 @@ deleteObjects() {
   echo ' "Quiet": true' >> $filename
   echo "}" >> $filename
 
-  aws s3api delete-objects --bucket $bucket_name --delete file://$filename --endpoint-url $endpoint_url --profile $profile
+  aws s3api delete-objects --cli-read-timeout $timeout --cli-connect-timeout $timeout --bucket $bucket_name --delete file://$filename --endpoint-url $endpoint_url --profile $profile
 }
 
 # Default to stdin if no input file is provided
