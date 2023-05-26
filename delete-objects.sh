@@ -26,7 +26,7 @@ bulk_count=0
 
 deleteObjects() {
   bulk_count=$((bulk_count + 1))
-  echo "Delete bulk number $bulk_count of $line_count objects"
+  echo `date`" Delete bulk number $bulk_count of $line_count objects" 
 
   echo "{" > $filename
   echo '  "Objects": [' >> $filename
